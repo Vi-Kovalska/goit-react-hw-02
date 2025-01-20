@@ -1,0 +1,11 @@
+.listOptions {
+    display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 7px;
+   margin-top: 15px;
+}
+
+.itemOption {}
+
+.btnOption {}
