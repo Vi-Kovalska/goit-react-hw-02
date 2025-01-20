@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import Options from './Options/Options'
 import Feedback from './Feedback/Feedback '
@@ -6,11 +6,21 @@ import Description from './Description/Description'
 import Notification from './Notification/Notification'
 
 function App() {
-  const [options, setOptions] = useState({
-	good: 0,
-	neutral: 0,
-	bad: 0
-  })
+  const [options, setOptions] = useState(()=>{
+    const savedOptions = window.localStorage.getItem("options");
+    if (savedOptions !== null) {
+      return JSON.parse(savedOptions);
+    }
+    return {
+    good: 0,
+    neutral: 0,
+    bad: 0
+  };
+  });
+
+   useEffect(() => {
+    window.localStorage.setItem("options", JSON.stringify(options));
+   }, [options]);
   
   const updateFeedback = feedbackType => {
     switch (feedbackType) {
